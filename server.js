@@ -23,13 +23,14 @@ app.use(express.json());
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
-app.use(express.static(path.resolve(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname, "./client/build")));
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
 app.use(notFound);
 app.use(errorHandler);
-app.get("/", (req, res) => {
-  res.send("Welcome!");
+
+app.get("*", (req, res) => {
+  res.send(express.static(path.join(__dirname, "./client/build/index.html")));
 });
 const start = async () => {
   try {
