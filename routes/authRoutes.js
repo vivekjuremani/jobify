@@ -9,7 +9,7 @@ const apiLimiter = rateLimiter({
   max: 10,
   message: "Too many requests from this IP, please try again after 15 minutes",
 });
-router.route("/register").post(apiLimiter,register);
+router.route("/register").post(apiLimiter, register);
 router.route("/login").post(apiLimiter, login);
 router.route("/updateUser").patch(authenticateUser, updateUser);
 
